@@ -13,26 +13,32 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Student() {
   const paperStyle = { padding: "50px 20px", width: 600, margin: "20px auto" };
-  
-  const classes = useStyles();
-  const [name, setName] = useState("");
-  const [address, setAddress] = useState("");
 
-  const handleClick=(e)=> {
+  //nim|name|class|major|date_birth|total_sks|status|
+  const classes = useStyles();
+
+  const [name, setName] = useState("");
+  //const [address, setAddress] = useState("");
+  const [kelas, setKelas] = useState("");
+  const [major, setMajor] = useState("");
+  const [date, setDate] = useState("");
+  const [totalSks, settotalSks] = useState("");
+  const [status, setStatus] = useState("");
+
+  const handleClick = (e) => {
     e.preventDefault();
-    const student = {name , address};
+    const student = { name, kelas, major, date, totalSks, status };
     console.log(student);
 
-    fetch("http://localhost:8080/student/add" , {
-      method:"POST",
-      headers:{"Content-Type" : "application/json"},
-      body:JSON.stringify(student)
-    }).then(()=> {
-      console.log("Student added Succesfully")
-    })
-    
-  }
-
+    fetch("http://localhost:8080/student/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(student),
+    }).then(() => {
+      console.log("Student added Succesfully");
+    });
+  };
+  //nim|name|class|major|date_birth|total_sks|status|
   return (
     <Container>
       <Paper elevation={3} style={paperStyle}>
@@ -46,13 +52,53 @@ export default function Student() {
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
-          <TextField
+          {/* <TextField
             id="filled-basic"
-            label="Student Adress"
+            label="Class"
             variant="outlined"
             fullWidth
             value={address}
             onChange={(e) => setAddress(e.target.value)}
+          /> */}
+          <TextField
+            id="filled-basic"
+            label="Kelas"
+            variant="outlined"
+            fullWidth
+            value={kelas}
+            onChange={(e) => setKelas(e.target.value)}
+          />
+          <TextField
+            id="filled-basic"
+            label="Jurusan"
+            variant="outlined"
+            fullWidth
+            value={major}
+            onChange={(e) => setMajor(e.target.value)}
+          />{" "}
+          <TextField
+            id="filled-basic"
+            label="Tanggal Lahir"
+            variant="outlined"
+            fullWidth
+            value={date}
+            onChange={(e) => setDate(e.target.value)}
+          />{" "}
+          <TextField
+            id="filled-basic"
+            label="Total SKS"
+            variant="outlined"
+            fullWidth
+            value={totalSks}
+            onChange={(e) => settotalSks(e.target.value)}
+          />
+          <TextField
+            id="filled-basic"
+            label="Status"
+            variant="outlined"
+            fullWidth
+            value={status}
+            onChange={(e) => setStatus(e.target.value)}
           />
           <Button variant="contained" color="secondary" onClick={handleClick}>
             Submit
