@@ -2,12 +2,10 @@ package com.springCourse.studentsystem.model;
 import java.time.LocalDate; // import the LocalDate class
 
 // ADD annotate class with entity annotation
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
+@Table(name = "mahasiswa",schema = "mgr")
 public class Student {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +18,7 @@ public class Student {
     private LocalDate tanggal_lahir;
     //umlah_sks|status
     private double jumlah_sks;
-    private byte status;
+    private String status;
 
     public int getNim() {
         return nim;
@@ -70,11 +68,11 @@ public class Student {
         this.jumlah_sks = jumlah_sks;
     }
 
-    public byte getStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(byte status) {
+    public void setStatus(String status) {
         this.status = status;
     }
 //CREATE constructor
